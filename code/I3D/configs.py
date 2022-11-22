@@ -11,6 +11,7 @@ class Config:
         self.batch_size = int(train_config['BATCH_SIZE'])
         self.max_steps = int(train_config['MAX_STEPS'])
         self.update_per_step = int(train_config['UPDATE_PER_STEP'])
+        self.num_samples = int(train_config['NUM_SAMPLES'])
 
         # optimizer
         opt_config = config['OPTIMIZER']
