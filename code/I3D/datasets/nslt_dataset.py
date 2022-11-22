@@ -52,7 +52,7 @@ def load_rgb_frames_from_video(vid_root, vid, start, num, resize=(256, 256)):
     vidcap.set(cv2.CAP_PROP_POS_FRAMES, start)
     for offset in range(min(num, int(total_frames - start))):
         success, img = vidcap.read()
-
+        print(img)
         w, h, c = img.shape
         if w < 226 or h < 226:
             d = 226. - min(w, h)
