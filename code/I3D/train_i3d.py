@@ -75,8 +75,11 @@ def run(configs,
     if weights:
         print('loading weights {}'.format(weights))
         i3d.load_state_dict(torch.load(weights))
-
-    i3d.cuda()
+   
+    """Device Selection"""
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    i3d.to(device)
+    #i3d.cuda()
     i3d = nn.DataParallel(i3d)
 
     lr = configs.init_lr
@@ -122,9 +125,11 @@ def run(configs,
                 inputs, labels, vid = data
 
                 # wrap them in Variable
-                inputs = inputs.cuda()
+                #inputs = inputs.cuda()
+                inputs = inputs.to(device)
                 t = inputs.size(2)
-                labels = labels.cuda()
+                #labels = labels.cuda()
+                labels = labels.to(device)
 
                 per_frame_logits = i3d(inputs, pretrained=False)
                 # upsample to input size
